@@ -1,5 +1,9 @@
 #read data from a file in the format: int\nint\nint\n...
 
+import math
+import matplotlib.pyplot
+from plotting import *
+
 ### functions ###
 
 def fileToIntList(file):
@@ -41,15 +45,46 @@ def minimum(numbersList):
 
 
 
-
-myFile = open("dados.txt", 'r')
+myFile = open("coletasDispositivo\\semSensor1540954526", 'r')
 
 numbersList = fileToIntList(myFile)
 
-print(numbersList)
 
-print("Mean of the numbers: " + str(mean(numbersList)))
+x = domain(0, len(numbersList)-1, 1)
+y = numbersList
 
-print("Larger number: " + str(maximum(numbersList)))
 
-print("Lesser number: " + str(minimum(numbersList)))
+matplotlib.pyplot.figure(1)
+myPlot(x,y)
+
+print("Media: " + str(mean(y)))
+
+
+##myFile = open("coletasDispositivo\\comSensorSemCarga1539052914", 'r')
+##numbersList = fileToIntList(myFile)
+##y = numbersList
+##matplotlib.pyplot.figure(2)
+##myPlot(x,y)
+##
+##
+##myFile = open("coletasDispositivo\\ferroSolda34W1539053092", 'r')
+##numbersList = fileToIntList(myFile)
+##y = numbersList
+##matplotlib.pyplot.figure(3)
+##myPlot(x,y)
+
+
+matplotlib.pyplot.show()
+
+
+print(maximum(y))
+
+
+
+##print(numbersList)
+##
+##print("Mean of the numbers: " + str(mean(numbersList)))
+##
+##print("Larger number: " + str(maximum(numbersList)))
+##
+##print("Lesser number: " + str(minimum(numbersList)))
