@@ -98,9 +98,9 @@ w = domain(0,20,0.1)
 ##
 ##matplotlib.pyplot.show()
 
-a = fourierTransform(t,xt,1)
-print(a)
-print(rms(a))
+#a = fourierTransform(t,xt,1)
+#print(a)
+#print(rms(a))
 
 
 
@@ -109,4 +109,4 @@ def f(x):
 
 x = domain(0,5,0.1)
 
-print(numericIntegral(x,f))
+#print(numericIntegral(x,f))
