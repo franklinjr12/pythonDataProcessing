@@ -1,0 +1,20 @@
+from processamentoDados import *
+
+a = list()
+
+size = 10
+
+for i in range(size):
+	a.append(i)
+
+print(a)
+
+
+meanV = mean(a)
+
+print(meanV)
+
+for i in range(size):
+	a[i] = a[i] - meanV
+
+print(a)

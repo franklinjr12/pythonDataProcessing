@@ -19,7 +19,6 @@ def fileToIntList(file):
             holder = holder + i
     return numbersList
 
-
 def mean(numbersList):
     accumulator = 0
     for i in numbersList:
@@ -41,6 +40,11 @@ def minimum(numbersList):
             myMin = i
     return myMin
 
+def rms(numbersList):
+    accumulator = 0
+    for number in numbersList:
+        accumulator = accumulator+number*number
+    return math.sqrt(accumulator)
 ###########################################################################
 
 

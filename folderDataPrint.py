@@ -15,6 +15,16 @@ def cModificationTimeToList(cStrTime):
 	fileTime.append(cStrTime[18])	
 	return fileTime
 
+
+
+# arquivo  = "rodando2//casaFds1541808317"
+
+# lastModified = str(time.ctime(os.path.getmtime(arquivo)))
+
+# print("last modified: %s" % lastModified)
+
+counter = 0
+
 dataResult = list()
 dataTime = list()
 data = list()
@@ -38,9 +48,11 @@ for filename in os.listdir(folderName):
 
 print("first time setted")
 
+
 print("Start processing")
 
 for filename in os.listdir(folderName):
+
 
 	myFile = open(folderName+"\\"+str(filename), 'r')
 
@@ -54,26 +66,18 @@ for filename in os.listdir(folderName):
 
 	deltaT = modificationTime - firstTime
 
+	for number in numbersList:
+		dataResult[1].append(number)
+
 	if(deltaT < 0):
 		break
 	else:
-		dataResult[0].append(deltaT) #armazena a hora
-		meanValue = mean(numbersList)
-		for i in range(len(numbersList)):
-			numbersList[i] = numbersList[i] - meanValue
-		valueTransformation = rms(numbersList)*(5/255)*(1/40)*(2000) 
-		dataResult[1].append(valueTransformation)
-
+		#dataResult[0].append(deltaT) #armazena a hora
+		#dataResult[1].append(mean(numbersList)) #armazena a media daquela hora
 		continue
 	break
 
-# meanValue = mean(dataResult[1])
 
-# print("Mean value = "+str(meanValue))
-
-# #taking bias out
-# for i in range(len(dataResult[1])):
-# 	dataResult[1][i] = dataResult[1][i] - meanValue
 
 print("End processing")
 
@@ -82,8 +86,8 @@ print("Plotting")
 
 #matplotlib.pyplot.figure(10)
 
-myPlot(dataResult[0], dataResult[1])
+#myPlot(dataResult[0], dataResult[1])
 
-#myPlot(range(len(dataResult[1])), dataResult[1])
+myPlot(range(len(dataResult[1])), dataResult[1])
 
 matplotlib.pyplot.show()

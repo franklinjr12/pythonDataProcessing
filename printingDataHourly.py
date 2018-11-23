@@ -25,6 +25,11 @@ folderName = "rodando2"
 
 firstTime = 0
 
+figureNumber = 1
+
+hoursWindow = 3
+
+
 print("Setting first time")
 
 for filename in os.listdir(folderName):
@@ -38,9 +43,12 @@ for filename in os.listdir(folderName):
 
 print("first time setted")
 
+hourDeltaTStart = firstTime
+
 print("Start processing")
 
 for filename in os.listdir(folderName):
+
 
 	myFile = open(folderName+"\\"+str(filename), 'r')
 
@@ -54,26 +62,30 @@ for filename in os.listdir(folderName):
 
 	deltaT = modificationTime - firstTime
 
-	if(deltaT < 0):
+	if(deltaT > (hoursWindow*10000+(hoursWindow*10))):
 		break
 	else:
-		dataResult[0].append(deltaT) #armazena a hora
-		meanValue = mean(numbersList)
-		for i in range(len(numbersList)):
-			numbersList[i] = numbersList[i] - meanValue
-		valueTransformation = rms(numbersList)*(5/255)*(1/40)*(2000) 
-		dataResult[1].append(valueTransformation)
+		#dataResult[0].append(deltaT) #armazena a hora
+		#dataResult[1].append(mean(numbersList)) #armazena a media daquela hora
+
+		for number in numbersList:
+			dataResult[1].append(number)
+
+		#print hourly graphs
+		if (modificationTime - hourDeltaTStart >= 10000):
+			matplotlib.pyplot.figure(figureNumber)
+			figureNumber = figureNumber + 1
+			hourDeltaTStart = modificationTime
+			myPlot(range(len(dataResult[1])), dataResult[1])
+			dataResult[1] = [dataResult[1][-1]]
+		else:
+			continue
+		
 
 		continue
 	break
 
-# meanValue = mean(dataResult[1])
 
-# print("Mean value = "+str(meanValue))
-
-# #taking bias out
-# for i in range(len(dataResult[1])):
-# 	dataResult[1][i] = dataResult[1][i] - meanValue
 
 print("End processing")
 
@@ -82,8 +94,8 @@ print("Plotting")
 
 #matplotlib.pyplot.figure(10)
 
-myPlot(dataResult[0], dataResult[1])
+#myPlot(dataResult[0], dataResult[1])
 
-#myPlot(range(len(dataResult[1])), dataResult[1])
+myPlot(range(len(dataResult[1])), dataResult[1])
 
 matplotlib.pyplot.show()
